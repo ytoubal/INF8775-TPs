@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # INF8775 - Analyse et conception d'algorithmes
 #   TP1 - Multiplication de Matrices

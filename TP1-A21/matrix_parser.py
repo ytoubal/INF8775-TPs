@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-import conventional
-
 def parse(matrix1_path, matrix2_path):
     global matrix1, matrix2
 
@@ -16,13 +13,4 @@ def parse(matrix1_path, matrix2_path):
         quit("Can't multiply the matrices since they don't have the same dimensions")
 
 
-if __name__ == "__main__":
-    parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex1_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex1_1")
-    print(matrix1)
-    print(matrix2)
 
-    from timeit import default_timer as timer
-    start = timer()
-    conventional.multiply(matrix1, matrix2)
-    end = timer()
-    print("--- %s seconds ---" % (end - start))
