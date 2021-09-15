@@ -17,7 +17,7 @@ def parse(matrix1_path, matrix2_path):
 
 
 if __name__ == "__main__":
-    parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\ex1_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\ex1_1")
+    parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex1_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex1_1")
     print(matrix1)
     print(matrix2)
 
