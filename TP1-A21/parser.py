@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import conventional
 
 def parse(matrix1_path, matrix2_path):
     global matrix1, matrix2
@@ -21,3 +21,8 @@ if __name__ == "__main__":
     print(matrix1)
     print(matrix2)
 
+    from timeit import default_timer as timer
+    start = timer()
+    conventional.multiply(matrix1, matrix2)
+    end = timer()
+    print("--- %s seconds ---" % (end - start))
