@@ -1,4 +1,4 @@
 #!/bin/sh
-py main.py "$@"
+#py main.py "$@"
 #python main.py "$@"
-#python3 main.py "$@"
+python3 main.py "$@"

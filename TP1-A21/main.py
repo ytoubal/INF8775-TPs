@@ -2,6 +2,9 @@
 import matrix_parser
 import conventional
 import argparse
+import strassen1
+import numpy as np
+
 
 if __name__ == "__main__":
     # Parse arguments
@@ -30,7 +33,7 @@ if __name__ == "__main__":
     print(show_result)
     print(show_time)
 
-    matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex1_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex1_1")
+    matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_1")
     print(matrix_parser.matrix1)
     print(matrix_parser.matrix2)
 
@@ -38,11 +41,15 @@ if __name__ == "__main__":
         from timeit import default_timer as timer
         start = timer()
 
-    result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
+    if algorithm == "conv":
+        result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
+
+    if algorithm == "strassen":
+        result = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
 
     if show_result:
         print(result)
-    
+
     if show_time:
         end = timer()
         print("--- %s seconds ---" % (end - start))

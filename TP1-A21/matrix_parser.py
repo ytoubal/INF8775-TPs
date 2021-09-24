@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+import numpy as np
+
+
 def parse(matrix1_path, matrix2_path):
     global matrix1, matrix2
 
