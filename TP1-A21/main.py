@@ -3,6 +3,7 @@ import matrix_parser
 import conventional
 import argparse
 import strassen1
+import strassen_sueil
 import numpy as np
 
 
@@ -33,9 +34,10 @@ if __name__ == "__main__":
     print(show_result)
     print(show_time)
 
-    matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_1")
-    print(matrix_parser.matrix1)
-    print(matrix_parser.matrix2)
+    # matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_1")
+    matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex5_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex5_1")
+    #print(matrix_parser.matrix1)
+    #print(matrix_parser.matrix2)
 
     if show_time:
         from timeit import default_timer as timer
@@ -43,9 +45,20 @@ if __name__ == "__main__":
 
     if algorithm == "conv":
         result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
+        # result2 = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
+        # print(result)
+        # print(result2)
+        # if (result == result2).all():
+        #     print("MEME REPONSE")
+        # else: 
+        #     print("REPONSE DIFFERENTE")
 
     if algorithm == "strassen":
         result = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
+    
+    if algorithm == "strassenSeuil":
+        result1 = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
+        result = strassen_sueil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 60)
 
     if show_result:
         print(result)
@@ -53,3 +66,10 @@ if __name__ == "__main__":
     if show_time:
         end = timer()
         print("--- %s seconds ---" % (end - start))
+
+
+#0.23899150000000002
+#0.19978820000000003
+#0.1988488
+#0.16311749999999997
+#0.1474204
