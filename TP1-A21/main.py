@@ -35,8 +35,8 @@ if __name__ == "__main__":
     print(show_result)
     print(show_time)
 
-    matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_1")
-    #matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_1")
+    matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/Tps/TP1-A21/data/ex2_1")
+    # matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPs\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPs\TP1-A21\data\ex8_1")
     #print(matrix_parser.matrix1)
     #print(matrix_parser.matrix2)
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 # results = []
 # for i in range(3,9):
 #     for j in range(1,5):
-#         matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_" + str(j))
+#         matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPS\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPS\TP1-A21\data\ex8_" + str(j))
 #         print(f"Dimension: {i}, exemplaire: {0} multiply {j}")
 #         start = timer()
 #         result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
