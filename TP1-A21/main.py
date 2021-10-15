@@ -5,6 +5,7 @@ import argparse
 import strassen1
 import strassen_sueil
 import numpy as np
+from timeit import default_timer as timer
 
 
 if __name__ == "__main__":
@@ -35,12 +36,11 @@ if __name__ == "__main__":
     print(show_time)
 
     # matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_1")
-    matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex5_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex5_1")
+    matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_1")
     #print(matrix_parser.matrix1)
     #print(matrix_parser.matrix2)
 
     if show_time:
-        from timeit import default_timer as timer
         start = timer()
 
     if algorithm == "conv":
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         result = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
     
     if algorithm == "strassenSeuil":
-        result1 = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
+        #result1 = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
         result = strassen_sueil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 60)
 
     if show_result:
@@ -67,9 +67,39 @@ if __name__ == "__main__":
         end = timer()
         print("--- %s seconds ---" % (end - start))
 
+# results = []
+# for i in range(9):
+#     start = timer()
+#     strassen_sueil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 2**i)
+#     end = timer()
+#     results.append(end-start)
+#     print("--- %s seconds ---" % (end - start))
+# index = results.index(min(results))
+# print(results)
+# print(2**index)
+    
 
-#0.23899150000000002
-#0.19978820000000003
-#0.1988488
-#0.16311749999999997
-#0.1474204
+results = []
+for i in range(3,9):
+    for j in range(1,5):
+        matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_" + str(j))
+        print(f"Dimension: {i}, exemplaire: {0} multiply {j}")
+        start = timer()
+        result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
+        end = timer()
+        print("conv")
+        print("--- %s seconds ---" % (end - start))
+
+        start = timer()
+        result = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
+        end = timer()
+        print("strassen")
+        print("--- %s seconds ---" % (end - start))
+
+        start = timer()
+        result = strassen_sueil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 8)
+        end = timer()
+        print("strassen seuil")
+        print("--- %s seconds ---" % (end - start))
+        print()
+
