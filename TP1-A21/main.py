@@ -35,8 +35,8 @@ if __name__ == "__main__":
     print(show_result)
     print(show_time)
 
-    # matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_1")
-    matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_1")
+    matrix_parser.parse(r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_0",r"/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP1-A21/data/ex2_1")
+    #matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_1")
     #print(matrix_parser.matrix1)
     #print(matrix_parser.matrix2)
 
