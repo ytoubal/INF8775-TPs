@@ -79,27 +79,27 @@ if __name__ == "__main__":
 # print(2**index)
     
 
-results = []
-for i in range(3,9):
-    for j in range(1,5):
-        matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_" + str(j))
-        print(f"Dimension: {i}, exemplaire: {0} multiply {j}")
-        start = timer()
-        result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
-        end = timer()
-        print("conv")
-        print("--- %s seconds ---" % (end - start))
+# results = []
+# for i in range(3,9):
+#     for j in range(1,5):
+#         matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TP1-A21\data\ex8_" + str(j))
+#         print(f"Dimension: {i}, exemplaire: {0} multiply {j}")
+#         start = timer()
+#         result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
+#         end = timer()
+#         print("conv")
+#         print("--- %s seconds ---" % (end - start))
 
-        start = timer()
-        result = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
-        end = timer()
-        print("strassen")
-        print("--- %s seconds ---" % (end - start))
+#         start = timer()
+#         result = strassen1.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
+#         end = timer()
+#         print("strassen")
+#         print("--- %s seconds ---" % (end - start))
 
-        start = timer()
-        result = strassen_sueil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 8)
-        end = timer()
-        print("strassen seuil")
-        print("--- %s seconds ---" % (end - start))
-        print()
+#         start = timer()
+#         result = strassen_sueil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 8)
+#         end = timer()
+#         print("strassen seuil")
+#         print("--- %s seconds ---" % (end - start))
+#         print()
 
