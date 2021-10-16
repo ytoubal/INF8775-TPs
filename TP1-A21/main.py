@@ -82,7 +82,7 @@ if __name__ == "__main__":
 # results = []
 # for i in range(3,9):
 #     for j in range(1,5):
-#         matrix_parser.parse(r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPS\TP1-A21\data\ex8_0",r"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPS\TP1-A21\data\ex8_" + str(j))
+#         matrix_parser.parse(rf"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPS\TP1-A21\data\ex{i}_0",rf"C:\Users\yanis\Desktop\Poly\A2021\INF8775\TPS\TP1-A21\data\ex{i}_{j}")
 #         print(f"Dimension: {i}, exemplaire: {0} multiply {j}")
 #         start = timer()
 #         result = conventional.multiply(matrix_parser.matrix1, matrix_parser.matrix2)
