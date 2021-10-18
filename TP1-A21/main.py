@@ -3,7 +3,7 @@ import matrix_parser
 import conventional
 import argparse
 import strassen
-import strassen_sueil
+import strassen_seuil
 import numpy as np
 from timeit import default_timer as timer
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     elif algorithm == "strassen":
         result = strassen.strassen(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2))
     elif algorithm == "strassenSeuil":
-        result = strassen_sueil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 8)
+        result = strassen_seuil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 8)
 
     if show_result:
         print(result)
