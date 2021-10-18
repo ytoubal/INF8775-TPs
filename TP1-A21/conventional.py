@@ -11,5 +11,5 @@ def multiply(matrix1, matrix2):
         for j in range(N):
             for k in range(N):
                 result[i][j] += matrix1[i][k] * matrix2[k][j]
-    #print(result)
+
     return np.array(result)

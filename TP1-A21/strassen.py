@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 import numpy as np
 
 def split(matrix):
@@ -46,10 +45,8 @@ def strassen(x,y):
 	c22 = p1 + p5 - p3 - p7
 
 	# Combining the 4 quadrants into a single matrix by stacking horizontally and vertically.
-	#From https://www.geeksforgeeks.org/strassens-matrix-multiplication/
+	# From https://www.geeksforgeeks.org/strassens-matrix-multiplication/
 	c = np.vstack((np.hstack((c11, c12)), np.hstack((c21, c22))))
-
-	#print(c)
 
 	return c
 
