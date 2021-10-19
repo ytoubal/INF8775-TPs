@@ -7,11 +7,15 @@ import strassen_seuil
 import numpy as np
 from timeit import default_timer as timer
 
+def print_result(array):
+    # Inspired by https://stackoverflow.com/questions/9360103/how-to-print-a-numpy-array-without-brackets/34833917
+    """
+    prints a 2-D numpy array without brackets
+    """
+    for a in array:
+        print(' '.join(map(str, a)))
 
 if __name__ == "__main__":
-
-    #Show the array without truncation 
-    np.set_printoptions(threshold=np.inf)
 
     # Parse arguments
     parser = argparse.ArgumentParser()
@@ -48,8 +52,8 @@ if __name__ == "__main__":
         result = strassen_seuil.strassenSeuil(np.array(matrix_parser.matrix1), np.array(matrix_parser.matrix2), 8)
 
     if show_result:
-        print(result)
+        print_result(result)
 
     if show_time:
         end = timer()
-        print("--- %s seconds ---" % (end - start))
+        print(end - start)
