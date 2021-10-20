@@ -58,4 +58,4 @@ if __name__ == "__main__":
 
     if show_time:
         end = timer()
-        print(end - start)
+        print(1000*(end - start))
