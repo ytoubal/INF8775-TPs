@@ -33,7 +33,7 @@ if __name__ == "__main__":
         start = timer()
 
     if algorithm == "glouton":
-        result = glouton.find_colors
+        result = glouton.find_colors()
     elif algorithm == "branch_bound":
        result = branch_and_bound.find_colors()
     elif algorithm == "tabou":
