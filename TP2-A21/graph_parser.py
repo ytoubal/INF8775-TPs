@@ -4,7 +4,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 def parse(matrix_path):
-    global vertex_num
     global graph
 
     graph = nx.Graph()
@@ -15,11 +14,11 @@ def parse(matrix_path):
         for _ in range(11):
             next(matrix_file)
         info_graph = matrix_file.readline().split(' ')
-        number_vertex = info_graph[2]
+        number_node = info_graph[2]
         number_edge = info_graph[3]
         # print(number_vertex)
         # print(number_edge)
-        graph.add_nodes_from([str(i+1) for i in range(int(number_vertex))])
+        graph.add_nodes_from([str(i+1) for i in range(int(number_node))], color=-1) # no color for each node
         next(matrix_file)
 
         for line in matrix_file: 
@@ -31,7 +30,7 @@ def parse(matrix_path):
         # print(graph.nodes)
         # print(graph.edges)
         nx.draw_networkx(graph, with_labels=True)
-        plt.show()
+        #plt.show()
     
 
 

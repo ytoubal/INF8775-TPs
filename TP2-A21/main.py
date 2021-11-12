@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import matrix_parser
+import graph_parser
 import argparse
 from timeit import default_timer as timer
 import glouton
@@ -22,18 +22,18 @@ if __name__ == "__main__":
 
     # Parameters
     algorithm = args.algorithm
-    path_matrix = args.path_ex
+    path_graph = args.path_ex
     show_result = args.show_result
     show_time = args.show_time
 
     #Constructing the matrices
-    matrix_parser.parse(path_matrix)
+    graph_parser.parse(path_graph)
 
     if show_time:
         start = timer()
 
     if algorithm == "glouton":
-        result = glouton.find_colors(matrix_parser.matrix)
+        result = glouton.find_colors(graph_parser.graph)
     elif algorithm == "branch_bound":
        result = branch_and_bound.find_colors()
     elif algorithm == "tabou":
