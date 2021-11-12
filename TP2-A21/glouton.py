@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+#!/usr/bin/env python3
+
+import matrixparser
+import node
+
+matrix = matrixparser.parse("/Users/yacinehamdani/Desktop/SessionA21-etranger/cours/inf8775/TP1-A21/INF8775-TPs/TP2-A21/instances/ex5_0")
+node1 = node.Node(None, None, None)
+
+
+              
+
+
+def chooseFirstPoint():
+       node1.calculateDegree(matrix)
+
+
+node1.calculateDegree(matrix)
+=======
 # def find_max_degree(matrix):
 #     max_val, max_index = -1, -1
 #     for index, row in enumerate(matrix):
@@ -39,3 +58,4 @@ def find_colors(matrix):
 #         next_color += 1
 #         uncolored_vertex.pop(V)
 #     return
+>>>>>>> 4452e322569673e7e2db0c751ab3eca700cf6a17
