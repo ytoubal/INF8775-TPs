@@ -42,4 +42,4 @@ def find_colors(graph: nx.Graph):
 
     #print(graph.nodes.data())
     #plt.show()
-    return
+    return [graph.nodes[node]["color"] for node in graph.nodes]

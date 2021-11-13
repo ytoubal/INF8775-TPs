@@ -37,13 +37,13 @@ if __name__ == "__main__":
     elif algorithm == "branch_bound":
        result = branch_and_bound.find_colors()
     elif algorithm == "tabou":
-        result = tabou.find_colors()
+        result = tabou.find_colors(graph_parser.graph)
     else:
         quit("L'algorithme en parametre n'est pas valide.")
 
     if show_result:
         #TODO
-        print()
+        print(result)
 
     if show_time:
         end = timer()
