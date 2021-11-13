@@ -1,10 +1,9 @@
 import networkx as nx
 import random
 import glouton
-import matplotlib.pyplot as plt
 
 ALPHA = 2
-MAX_ITERATION = 1000
+MAX_ITERATION = 500
 
 def node_color_conflict(graph, node_recolor, new_color):
     total_conflicts = 0
@@ -53,10 +52,6 @@ def tabou_search(graph: nx.Graph, num_color, new_coloration, total_conflicts):
         if lowest_conflict == 999:
             return True, []
 
-        # print(lowest_conflict)
-        # print(graph.nodes.data())
-        # print(best_neighbor)
-
         chosen_node = best_neighbor[0]
         old_color = graph.nodes[chosen_node]["color"]
         tabou_pair = (chosen_node, old_color)
@@ -76,8 +71,6 @@ def tabou_search(graph: nx.Graph, num_color, new_coloration, total_conflicts):
         graph.nodes[chosen_node]["color"] = new_color
 
         #Compare with best coloration
-        #current_conflict = node_color_conflict(graph, chosen_node, new_color)
-        #print(current_conflict, lowest_conflict)
         if  lowest_conflict < best_conflicts:
             best_conflicts = lowest_conflict
             best_coloration = [graph.nodes[node]["color"] for node in graph.nodes]
@@ -88,7 +81,6 @@ def tabou_search(graph: nx.Graph, num_color, new_coloration, total_conflicts):
             i_without_improv += 1
 
         i += 1
-    print("fin")
     return True, []
 
 def evaluate_node_conflict(graph, node_recolor, color):
@@ -131,27 +123,25 @@ def reduce_num_colors(graph: nx.Graph, solution):
 def find_colors(graph: nx.Graph):
 
     s0 = glouton.find_colors(graph) # intial solution
-    print(s0)
     num_color = max(s0) + 1
     best_solution = s0 #C*
 
     while True:
-        new_coloration, total_conflicts = reduce_num_colors(graph, s0)
+        new_coloration, total_conflicts = reduce_num_colors(graph, best_solution)
         num_color -= 1
-        print(total_conflicts)
+
         #Set graph colors to new coloration
         for index, color in enumerate(new_coloration):
             graph.nodes[str(index+1)]["color"] = color
+        
+        if total_conflicts == 0:
+            better_solution = new_coloration
+        else:
+            #Fix conflicts
+            stop_algo, better_solution = tabou_search(graph, num_color, new_coloration, total_conflicts) 
 
-        print("After reduce " + str(new_coloration))
-
-        #Fix conflicts
-        stop_algo, better_solution = tabou_search(graph, num_color, new_coloration, total_conflicts) 
-        print(stop_algo, better_solution)
-        if stop_algo:
-            break
-
+            if stop_algo:
+                break
         best_solution = better_solution
-    print(best_solution)
-    #plt.show()
+
     return best_solution
