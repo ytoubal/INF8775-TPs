@@ -3,7 +3,7 @@ import random
 import glouton
 
 ALPHA = 2
-MAX_ITERATION = 500
+MAX_ITERATION = 1000
 
 def node_color_conflict(graph, node_recolor, new_color):
     total_conflicts = 0
