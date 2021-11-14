@@ -21,11 +21,13 @@ def find_DSAT(graph):
             
     return max_dsat_node
 
-def find_smallest_color(node, graph, current_color = 0):
-    for adj_node in node.neighbors:
-        if adj_node.color == current_color:
-            current_color = find_smallest_color(node, graph, current_color + 1)
-    return current_color
+def find_smallest_color(node):
+    colors_taken = [adj_node.color for adj_node in node.neighbors]
+    max_color = max(colors_taken)
+    for i in range(max_color+1):
+        if i not in colors_taken:
+            return i
+    return max_color + 1
 
 def find_colors(graph):
     nodes_degree = [node.get_degree() for node in graph.nodes]
@@ -34,7 +36,7 @@ def find_colors(graph):
 
     while not check_nodes_colored(graph):
         chosen_node = find_DSAT(graph)
-        color = find_smallest_color(chosen_node, graph)
+        color = find_smallest_color(chosen_node)
         chosen_node.set_color(color)
 
     return [node.color for node in graph.nodes]
