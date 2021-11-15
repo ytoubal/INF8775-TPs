@@ -72,7 +72,7 @@ def tabou_search(graph, num_color, new_coloration, total_conflicts):
         i += 1
     return True, []
 
-def evaluate_conflicts(nodes, max_color): 
+def evaluate_conflicts(graph, nodes, max_color): 
     lowest_conflicts = {}
     total_conflicts = 0
 
@@ -81,7 +81,10 @@ def evaluate_conflicts(nodes, max_color):
         curr_lowest_conflict, curr_best_color = 9999, -1
 
         for color in range(max_color): # check all colors except k-1
-            num_conflicts = node_recolor.evaluate_color_conflict(color)
+            old_color = node_recolor.color
+            node_recolor.set_color(color)
+            num_conflicts = graph.evaluate_num_conflicts()
+            node_recolor.set_color(old_color)
             
             if num_conflicts < curr_lowest_conflict:
                 curr_lowest_conflict = num_conflicts
@@ -97,7 +100,7 @@ def reduce_num_colors(graph, solution, num_color):
     max_color = num_color-1
     nodes_max_color = [graph.nodes[i] for i, color in enumerate(solution) if color == max_color] #Nodes containing highest color
     
-    lowest_conflicts, total_conflicts = evaluate_conflicts(nodes_max_color, max_color)
+    lowest_conflicts, total_conflicts = evaluate_conflicts(graph, nodes_max_color, max_color)
 
     new_solution = [color for color in solution]
     for node, color in lowest_conflicts.items():
@@ -106,9 +109,8 @@ def reduce_num_colors(graph, solution, num_color):
 
 def find_colors(graph):
 
-    s0 = glouton.find_colors(graph) # initial solution
-    num_color = max(s0) + 1
-    best_solution = s0 #C*
+    best_solution = glouton.find_colors(graph) # initial solution
+    num_color = max(best_solution) + 1
 
     while True:
         new_coloration, total_conflicts = reduce_num_colors(graph,best_solution, num_color)

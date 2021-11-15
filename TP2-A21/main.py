@@ -35,15 +35,15 @@ if __name__ == "__main__":
     if algorithm == "glouton":
         result = glouton.find_colors(graph_parser.graph)
     elif algorithm == "branch_bound":
-       result = branch_and_bound.find_colors()
+       result = branch_and_bound.find_colors(graph_parser.graph)
     elif algorithm == "tabou":
         result = tabou.find_colors(graph_parser.graph)
     else:
         quit("L'algorithme en parametre n'est pas valide.")
 
     if show_result:
-        #TODO
         print(result)
+        print(max(result))
 
     if show_time:
         end = timer()

@@ -19,8 +19,10 @@ class Graph:
         total_conflicts = 0
         for node in graph.nodes:
             for neighbor in node.neighbors:
-                if node.color == neighbor.color:
-                    total_conflicts += 1
+                if node.color != -1 and \
+                   neighbor.color != -1 and \
+                   node.color == neighbor.color:
+                   total_conflicts += 1
                     
         return total_conflicts/2
 
@@ -49,12 +51,12 @@ class Node:
     def remove_neighbor(self, node):
         self.neighbors.remove(node)
 
-    def evaluate_color_conflict(self, color):
-        num_conflicts = 0
-        for neighbor in self.neighbors:
-            if neighbor.color == color:
-                num_conflicts += 1
-        return num_conflicts
+    # def evaluate_color_conflict(self, color):
+    #     num_conflicts = 0
+    #     for neighbor in self.neighbors:
+    #         if neighbor.color == color:
+    #             num_conflicts += 1
+    #     return num_conflicts
 
     def get_degree(self):
         return len(self.neighbors)
