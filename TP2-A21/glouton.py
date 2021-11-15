@@ -6,20 +6,36 @@ def check_nodes_colored(graph):
             return False
     return True
 
+def glouton_choice(graph):
+    max_DSAT, dsat_nodes = find_DSAT(graph)
+    potential_nodes = [graph.nodes[i] for i, dsat in enumerate(dsat_nodes) if dsat == max_DSAT]
+
+    max_deg, best_node = -1, None
+    for node in potential_nodes:
+        degree = node.get_degree()
+        if degree > max_deg:
+            max_deg = degree
+            best_node = node
+    
+    return best_node
+
 def find_DSAT(graph):
-    max_dsat, max_dsat_node = -1, None
+    max_dsat, dsat_nodes = -1, []
     for node in graph.nodes:
         if node.color != -1:
+            dsat_nodes.append(0)
             continue
+        
         dsat = 0
         for adj_node in node.neighbors:
             if adj_node.color != -1:
                 dsat += 1
+
+        dsat_nodes.append(dsat)
         if dsat > max_dsat:
             max_dsat = dsat
-            max_dsat_node = node   
             
-    return max_dsat_node
+    return max_dsat, dsat_nodes
 
 def find_smallest_color(node):
     colors_taken = [adj_node.color for adj_node in node.neighbors]
@@ -35,7 +51,7 @@ def find_colors(graph):
     graph.nodes[max_degree_node].set_color(0) # C[v] = 0
 
     while not check_nodes_colored(graph):
-        chosen_node = find_DSAT(graph)
+        chosen_node = glouton_choice(graph)
         color = find_smallest_color(chosen_node)
         chosen_node.set_color(color)
 
