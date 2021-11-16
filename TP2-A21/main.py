@@ -43,7 +43,6 @@ if __name__ == "__main__":
 
     if show_result:
         print(result)
-        print(max(result))
 
     if show_time:
         end = timer()
