@@ -9,11 +9,10 @@ def explore_coloration(graph, coloration, number_color):
     chosen_node_index = int(chosen_node.id) -1 
     for color in range(number_color+1):
         chosen_node.set_color(color)
-        #print(graph.evaluate_num_conflicts())
         new_coloration = coloration[:]
         new_coloration[chosen_node_index] = color
-        #print(new_coloration)
-        if graph.evaluate_num_conflicts() == 0:
+
+        if sum(node.conflicts for node in graph.nodes) == 0:
             new_coloration = coloration[:]
             new_coloration[chosen_node_index] = color
             colorations.append(new_coloration)

@@ -2,7 +2,8 @@ import random
 import glouton
 
 ALPHA = 2
-MAX_ITERATION = 1500
+G = 10
+MAX_ITERATION = 1000
 
 def tabou_search(graph, num_color, new_coloration, total_conflicts):
     tabou = {}
@@ -20,17 +21,17 @@ def tabou_search(graph, num_color, new_coloration, total_conflicts):
         
         #generate neighbors
         for node in graph.nodes:
+            tabou_colors = tabou.get(node.id, [])
             for color in colors:
-                valid_color = node.color != color and \
-                           (node.id not in tabou or \
-                            color not in tabou[node.id])
+                valid_color = node.color != color and color not in tabou_colors
                 if not valid_color: 
                     continue
 
                 old_color = node.color
-                node.color = color
-                total_conflicts = graph.evaluate_num_conflicts()
-                node.color = old_color
+                node.set_color(color)
+                
+                total_conflicts = sum(node.conflicts for node in graph.nodes)
+                node.set_color(old_color)
 
                 #Choose best neighbor
                 if total_conflicts < lowest_conflict:
@@ -45,19 +46,19 @@ def tabou_search(graph, num_color, new_coloration, total_conflicts):
         old_color = chosen_node.color
         tabou_pair = (chosen_node, old_color)
         tabou.setdefault(chosen_node.id, []).append(old_color)
-        expiration = i + (ALPHA * lowest_conflict + random.uniform(1, 11))
+        expiration = i + (ALPHA * lowest_conflict + random.randrange(1, G+1))
         tabou_expiration.setdefault(expiration, []).append(tabou_pair)
 
         #remove expired tabou pairs
         if i in tabou_expiration:
             pairs_to_remove = tabou_expiration[i]
             for pair in pairs_to_remove:
-                tabou[pair[0]].remove(pair[1])
+                tabou[pair[0].id].remove(pair[1])
             del tabou_expiration[i]
 
         #update graph
         new_color = best_neighbor[1]
-        chosen_node.color = new_color
+        chosen_node.set_color(new_color)
 
         #Compare with best coloration
         if  lowest_conflict < best_conflicts:
@@ -83,7 +84,7 @@ def evaluate_conflicts(graph, nodes, max_color):
         for color in range(max_color): # check all colors except k-1
             old_color = node_recolor.color
             node_recolor.set_color(color)
-            num_conflicts = graph.evaluate_num_conflicts()
+            num_conflicts = sum(node.conflicts for node in graph.nodes)
             node_recolor.set_color(old_color)
             
             if num_conflicts < curr_lowest_conflict:
@@ -102,7 +103,7 @@ def reduce_num_colors(graph, solution, num_color):
     
     lowest_conflicts, total_conflicts = evaluate_conflicts(graph, nodes_max_color, max_color)
 
-    new_solution = [color for color in solution]
+    new_solution = solution[:]
     for node, color in lowest_conflicts.items():
         new_solution[node] = color 
     return new_solution, total_conflicts
@@ -118,7 +119,7 @@ def find_colors(graph):
 
         #Set graph colors to new coloration
         for index, color in enumerate(new_coloration):
-            graph.nodes[index].color = color
+            graph.nodes[index].set_color(color)
         
         if total_conflicts == 0:
             better_solution = new_coloration

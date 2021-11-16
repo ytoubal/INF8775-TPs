@@ -15,17 +15,6 @@ class Graph:
         node1.add_neighbor(node2)
         node2.add_neighbor(node1)     
 
-    def evaluate_num_conflicts(self):
-        total_conflicts = 0
-        for node in graph.nodes:
-            for neighbor in node.neighbors:
-                if node.color != -1 and \
-                   neighbor.color != -1 and \
-                   node.color == neighbor.color:
-                   total_conflicts += 1
-                    
-        return total_conflicts/2
-
     def show_graph(self):
         for node in self.nodes:
             print("Node: " + node.id)
@@ -41,22 +30,24 @@ class Node:
         self.id = id
         self.color = color
         self.neighbors = []
+        self.conflicts = 0
 
-    def set_color(self, color):
-        self.color = color
+    def set_color(self, new_color):
+        for node in self.neighbors:
+            if node.color == -1:
+                continue
+            if self.color != -1 and self.color == node.color:
+                self.conflicts -= 1
+            if new_color == node.color and new_color != -1:
+                self.conflicts += 1
+
+        self.color = new_color
 
     def add_neighbor(self, node):
         self.neighbors.append(node)
     
     def remove_neighbor(self, node):
         self.neighbors.remove(node)
-
-    # def evaluate_color_conflict(self, color):
-    #     num_conflicts = 0
-    #     for neighbor in self.neighbors:
-    #         if neighbor.color == color:
-    #             num_conflicts += 1
-    #     return num_conflicts
 
     def get_degree(self):
         return len(self.neighbors)
