@@ -1,3 +1,2 @@
 #!/bin/sh
-#python3 main.py "$@"
-py main.py "$@"
+python3 main.py "$@"

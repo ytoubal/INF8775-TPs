@@ -42,7 +42,8 @@ if __name__ == "__main__":
         quit("L'algorithme en parametre n'est pas valide.")
 
     if show_result:
-        print(result)
+        print(max(result)+1)
+        print(*result)
 
     if show_time:
         end = timer()
