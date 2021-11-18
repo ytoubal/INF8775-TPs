@@ -5,18 +5,20 @@ def explore_coloration(graph, coloration, number_color):
     colorations = []
     for i, color in enumerate(coloration):
         graph.nodes[i].set_color(color)
+
     chosen_node = common.glouton_choice(graph)
     chosen_node_index = int(chosen_node.id) -1 
+
     for color in range(number_color+1):
-        chosen_node.set_color(color)
-        new_coloration = coloration[:]
-        new_coloration[chosen_node_index] = color
+        chosen_node.set_color(color) #simulate color to calculate conflicts
 
         if sum(node.conflicts for node in graph.nodes) == 0:
             new_coloration = coloration[:]
             new_coloration[chosen_node_index] = color
             colorations.append(new_coloration)
+
         chosen_node.set_color(-1)
+
     return colorations
 
 def find_colors(graph):

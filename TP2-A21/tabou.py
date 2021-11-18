@@ -38,10 +38,11 @@ def tabou_search(graph, num_color, new_coloration, total_conflicts):
                     lowest_conflict = total_conflicts
                     best_neighbor = (node, color)
 
-        #Update tabou list
+        #When no neighbors are found
         if lowest_conflict == 999:
             return True, []
 
+        #Update tabou list
         chosen_node = best_neighbor[0]
         old_color = chosen_node.color
         tabou_pair = (chosen_node, old_color)
@@ -64,6 +65,7 @@ def tabou_search(graph, num_color, new_coloration, total_conflicts):
         if  lowest_conflict < best_conflicts:
             best_conflicts = lowest_conflict
             best_coloration = [node.color for node in graph.nodes]
+            #When a solution have been found
             if best_conflicts == 0:
                 return False, best_coloration
             i_without_improv = 0
