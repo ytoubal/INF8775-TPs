@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import graph_parser
+import instance_parser
 import argparse
 
 if __name__ == "__main__":
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     show_result = args.show_result
 
     #Constructing the matrices
-    graph_parser.parse(path_graph)
+    instance_parser.parse(path_graph)
     result = []
 
     if show_result:
