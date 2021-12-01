@@ -88,13 +88,13 @@ def find_conflicts(path):
     
     return number_conflicts
 
-def algo(graph):
-    index = 0
-    sorted_height = sorted(graph.nodes, key=lambda x: x.height)
-    first_node = sorted_height[index]
+def algo(graph, start):
+    #index = 0
+    #sorted_height = sorted(graph.nodes, key=lambda x: x.height)
+    first_node = random.choice(graph.nodes)
     path = [first_node]
     
-    while True:
+    while timer() - start < 180:
         potential_path = extension(graph, path)
         if potential_path != None:
             #print(len(path))
@@ -102,21 +102,25 @@ def algo(graph):
             continue
         
         new_paths = posa_extension(graph, path)
-        for new_path in new_paths:
-            potential_path = extension(graph, new_path)
-            if potential_path != None:
+        # for new_path in new_paths:
+        new_path = random.choice(new_paths)
+        potential_path = extension(graph, new_path)
+        if potential_path != None:
                 #print(len(path))
-                path = potential_path
-                continue
+            path = potential_path
+            continue
         
         if len(path) == len(graph.nodes):
-            print("Solution found")
+            #print("Solution found")
             return path
         else:
             #print("Solution not found")
             #print(len(path))
-            index += 1
-            first_node = sorted_height[index]
+            #index += 1
+            # if index == len(graph.nodes):
+            #     print("Solution not found")
+            #     break
+            first_node = random.choice(graph.nodes)
             path = [first_node]
         #break
         
@@ -126,11 +130,11 @@ def extension(graph, path):
     for node in graph.nodes:
         if node in path: continue
         
-        if node.id in path_start.friends:
-            path.insert(0, node)
-            return path
-        elif node.id in path_end.friends:
+        if node.id in path_end.friends:
             path.append(node)
+            return path
+        elif node.id in path_start.friends:
+            path.insert(0, node)
             return path
     return None
       
@@ -138,8 +142,8 @@ def extension(graph, path):
 def posa_extension(graph, path):
     extensions = []
     
-    for friend_idx in path[-1].friends: #find the friends of the last node
-        friend = graph.nodes[int(friend_idx)-1]
+    for friend_id in path[-1].friends: #find the friends of the last node
+        friend = graph.nodes[int(friend_id)-1]
         if friend in path: #if friend is in the current path we can form a new path
             index = path.index(friend)
             changed_path = path[index+1:]
@@ -174,15 +178,26 @@ if __name__ == "__main__":
     # print([node.id for node in result1[0]])
     # print([node.id for node in result1[1]])
     # result = []
-    result = algo(graph_parser.graph)
-    result_ids = [student.id for student in result]
+    best_conflicts = 999
+    while timer() - start < 180:
+        
+        result = algo(graph_parser.graph, start)
     # path = [Node("0", 10), Node("0", 1), Node("0", 2), Node("0", 4), Node("0", 11), Node("0", 5), Node("0", 20)]
-    number_conflicts = find_conflicts(result)
-    print("Conflits: " + str(number_conflicts))
+        if result == None:
+            break
+        number_conflicts = find_conflicts(result)
+        if number_conflicts < best_conflicts:
+            result_ids = [student.id for student in result]
+            best_conflicts = number_conflicts
+        #print("Conflits: " + str(number_conflicts))
     end = timer()
     print(end - start)
+    print(best_conflicts)
 
     if show_result:
-        print(*result_ids)
+        if result_ids != None:
+            print(*result_ids)
+        #sorted_height = sorted(graph_parser.graph.nodes, key=lambda x: x.height)
+        #print(*[s.id for s in sorted_height])
         #else:
             #print(str(number_conflicts))
