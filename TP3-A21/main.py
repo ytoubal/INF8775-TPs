@@ -89,7 +89,7 @@ if __name__ == "__main__":
     while timer() - start < 180:
         
         #result = last_vegas1.algo(graph_parser.graph, start)
-        result = last_vegas2.algo(graph_parser.graph, start)
+        result = last_vegas3.algo(graph_parser.graph, start)
         if result == None:
             break
         number_conflicts = find_conflicts(result)

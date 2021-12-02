@@ -1,23 +1,23 @@
-# 66_99.0 #63
-# 66_99.1 #fail
-# 66_534.0 #62
-# 66_534.1 #61
-# 66_970.0 #58
-# 66_970.1 #62
+# 66_99.0 #63 62 fail
+# 66_99.1 #fail fail fail   
+# 66_534.0 #62 59 53
+# 66_534.1 #61 61 54
+# 66_970.0 #58 61 53
+# 66_970.1 #62 63 55
 
-# 118_178.0 #fail
-# 118_178.1 #fail
-# 118_1570.0 #112
-# 118_1570.1 #108
-# 118_2962.0 #113
-# 118_2962.1 #113
+# 118_178.0 #fail fail  
+# 118_178.1 #fail fail
+# 118_1570.0 #112 111 105
+# 118_1570.1 #108 112 110
+# 118_2962.0 #113 111 106
+# 118_2962.1 #113 116 108
 
-# 558_837.0 #fail   
-# 558_837.1 #fail
-# 558_31973.0 #551
-# 558_31973.1 #549
-# 558_63109.0 #553
-# 558_63109.1 #547
+# 558_837.0 #fail fail 
+# 558_837.1 #fail fail
+# 558_31973.0 #551 548 550
+# 558_31973.1 #549 550 550
+# 558_63109.0 #553 551 549
+# 558_63109.1 #547 552 549
 
 import random
 from timeit import default_timer as timer
@@ -41,6 +41,7 @@ def algo(graph, start):
     potential_paths = [path]
     solution = []
     best_conflict = 999
+    
     while timer() - start < 180:
         potential_path = extension(graph, path)
         if potential_path != None:
@@ -52,8 +53,9 @@ def algo(graph, start):
         new_paths = posa_extension(graph, path)
         # for new_path in new_paths:
         potential_paths.extend(new_paths)
-        new_path = random.choice(new_paths)
-        potential_path = extension(graph, new_path)
+        potential_paths.remove(path)
+        path = random.choice(new_paths)
+        potential_path = extension(graph, path)
         if potential_path != None:
                 #print(len(path))
             potential_paths.remove(path)
@@ -66,22 +68,21 @@ def algo(graph, start):
             conflicts = find_conflicts(path)
             if conflicts < best_conflict:
                 solution = path
+                best_conflict = conflicts
             potential_paths.remove(path)
-            path = random.choice(potential_paths)
-        else:
             #print("Solution not found")
             #print(len(path))
             #index += 1
             # if index == len(graph.nodes):
             #     print("Solution not found")
             #     break
+        
+        if len(potential_paths) > 0:
+            path = random.choice(potential_paths)
+        else:
             first_node = random.choice(graph.nodes)
-            if len(potential_paths) > 0:
-                path = random.choice(potential_paths)
-            else:
-                first_node = random.choice(graph.nodes)
-                path = [first_node]
-                potential_paths = [path]
+            path = [first_node]
+            potential_paths = [path]
         #break
     return solution
         
