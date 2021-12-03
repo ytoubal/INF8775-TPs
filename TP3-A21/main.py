@@ -7,7 +7,7 @@ import math
 from timeit import default_timer as timer
 import last_vegas1
 import last_vegas2
-import last_vegas3
+import algo
 
 #branch and bound
 # def hamiltonianPaths(graph, v, visited, path, n):
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     while timer() - start < 180:
         
         #result = last_vegas1.algo(graph_parser.graph, start)
-        result = last_vegas3.algo(graph_parser.graph, start)
+        result = algo.find_result(graph_parser.graph, start)
         if result == None:
             break
         number_conflicts = find_conflicts(result)
