@@ -51,7 +51,8 @@ def find_result(graph, start):
         
         #Visit other paths or restart from a new random node
         if len(potential_paths) > 0:
-            path = random.choice(potential_paths)
+            path_idx = find_longest_path(potential_paths)
+            path = potential_paths[path_idx]
         else:
             first_node = random.choice(graph.nodes)
             path = [first_node]
@@ -63,10 +64,15 @@ def find_result(graph, start):
 def update_path(path, extended_paths, potential_paths):
     potential_paths.extend(extended_paths)
     potential_paths.remove(path)
-    #Find and select the longest path 
+    
+    # path_idx = find_longest_path(potential_paths)
+    # return potential_paths[path_idx] #new path
+    return random.choice(extended_paths)
+
+#Find and select the longest potential path 
+def find_longest_path(potential_paths):
     path_max = [len(p) for p in potential_paths]
-    path_idx = path_max.index(max(path_max))
-    return potential_paths[path_idx] #new path
+    return path_max.index(max(path_max))
 
 #If possible extend the current path from the start or the end
 def extension(graph, path):
