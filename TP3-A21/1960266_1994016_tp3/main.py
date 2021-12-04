@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import graph_parser
-from graph_parser import Node
 import argparse
-from timeit import default_timer as timer
 import algo
 
 if __name__ == "__main__":
