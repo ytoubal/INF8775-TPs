@@ -23,6 +23,6 @@ if __name__ == "__main__":
     graph_parser.parse(path_graph)
     
     #Run the algorithm
-    result = algo.find_result(graph_parser.graph, show_result)
+    algo.find_result(graph_parser.graph, show_result)
 
 

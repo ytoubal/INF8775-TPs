@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import graph_parser
+from graph_parser import Node
 import argparse
+from timeit import default_timer as timer
 import algo
 
 if __name__ == "__main__":
@@ -21,6 +23,6 @@ if __name__ == "__main__":
     graph_parser.parse(path_graph)
     
     #Run the algorithm
-    result = algo.find_result(graph_parser.graph, show_result)
+    algo.find_result(graph_parser.graph, show_result)
 
 

@@ -68,8 +68,6 @@ def find_result(graph, show_result):
         else:
             break
 
-    return solution
-
 #Update potential paths and return a new path to follow
 def update_path(path, extended_paths, potential_paths):
     potential_paths.extend(extended_paths)
